@@ -31,6 +31,7 @@ import { generateSHA256Hash, getFallbackAvatarInitials } from "@/lib/utils";
 import { api } from "@/utils/api";
 import { Configure2FA } from "./configure-2fa";
 import { Enable2FA } from "./enable-2fa";
+import { ManagePasskeys } from "./manage-passkeys";
 
 const profileSchema = z.object({
 	email: z
@@ -149,7 +150,7 @@ export const ProfileForm = () => {
 
 	return (
 		<div className="w-full">
-			<Card className="h-full bg-sidebar  p-2.5 rounded-xl  max-w-5xl mx-auto">
+			<Card className="h-full bg-sidebar  p-2.5 rounded-xl w-full">
 				<div className="rounded-xl bg-background shadow-md ">
 					<CardHeader className="flex flex-row gap-2 flex-wrap justify-between items-center">
 						<div>
@@ -162,7 +163,10 @@ export const ProfileForm = () => {
 							</CardDescription>
 						</div>
 
-						{!data?.user.twoFactorEnabled ? <Enable2FA /> : <Configure2FA />}
+						<div className="flex flex-row gap-2 flex-wrap">
+							<ManagePasskeys />
+							{!data?.user.twoFactorEnabled ? <Enable2FA /> : <Configure2FA />}
+						</div>
 					</CardHeader>
 
 					<CardContent className="space-y-2 py-8 border-t">

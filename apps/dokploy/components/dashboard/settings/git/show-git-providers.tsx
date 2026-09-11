@@ -33,6 +33,7 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { api } from "@/utils/api";
+import { DEFAULT_GITHUB_URL } from "@/utils/github-utils";
 import { useUrl } from "@/utils/hooks/use-url";
 import { AddBitbucketProvider } from "./bitbucket/add-bitbucket-provider";
 import { EditBitbucketProvider } from "./bitbucket/edit-bitbucket-provider";
@@ -68,7 +69,7 @@ export const ShowGitProviders = () => {
 
 	return (
 		<div className="w-full">
-			<Card className="h-full bg-sidebar p-2.5 rounded-xl max-w-5xl mx-auto">
+			<Card className="h-full bg-sidebar p-2.5 rounded-xl w-full">
 				<div className="rounded-xl bg-background shadow-md ">
 					<CardHeader className="">
 						<CardTitle className="text-xl flex flex-row gap-2">
@@ -161,6 +162,14 @@ export const ShowGitProviders = () => {
 																		<span className="text-sm font-medium">
 																			{gitProvider.name}
 																		</span>
+																		{isGithub &&
+																			gitProvider.github?.githubUrl &&
+																			gitProvider.github.githubUrl !==
+																				DEFAULT_GITHUB_URL && (
+																				<span className="text-xs text-muted-foreground">
+																					{gitProvider.github.githubUrl}
+																				</span>
+																			)}
 																		<span className="text-xs text-muted-foreground">
 																			{formatDate(
 																				gitProvider.createdAt,
